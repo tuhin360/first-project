@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express';
 import { StudentServices } from './student.service';
-import { z } from "zod";
+// import { z } from "zod";
 import studentValidationSchema from './student.validation';
 
 

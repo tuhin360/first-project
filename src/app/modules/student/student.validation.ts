@@ -20,8 +20,8 @@ const guardianValidationSchema = z.object({
   fatherOccupation: z.string(),
   fatherContactNo: z.string(),
   motherName: z.string(),
-  // motherOccupation: z.string().optional(),
-  // motherContactNo: z.string().optional(),
+  motherOccupation: z.string().optional(),
+  motherContactNo: z.string().optional(),
 });
 
 const localGuardianValidationSchema = z.object({
