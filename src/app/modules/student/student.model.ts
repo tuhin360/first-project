@@ -1,5 +1,4 @@
-import { Schema } from 'mongoose';
-import validator from 'validator';
+import { Schema, model } from 'mongoose';
 import {
   TGuardian,
   TLocalGuardian,
@@ -7,7 +6,6 @@ import {
   StudentModel,
   TUserName,
 } from './student.interface';
- 
 
 const userNameSchema = new Schema<TUserName>({
   firstName: {
@@ -15,13 +13,7 @@ const userNameSchema = new Schema<TUserName>({
     required: [true, 'First name is required'],
     trim: true,
     maxlength: [20, 'First name can not be more than 20 characters'],
-    validate: {
-      validator: function (value: string) {
-        const firstNameStr = value.charAt(0).toUpperCase() + value.slice(1);
-        return firstNameStr === value;
-      },
-      message: '{VALUE} is not capitalized format',
-    },
+     
   },
   middleName: {
     type: 'String',
@@ -29,12 +21,9 @@ const userNameSchema = new Schema<TUserName>({
   },
   lastName: {
     type: 'String',
-    required: [true, 'Last name is required'],
     trim: true,
-    validate: {
-      validator: (value: string) => validator.isAlpha(value),
-      message: '{VALUE} is not valid',
-    },
+    required: [true, 'Last name is required'],
+    maxlength: [20, 'Last name can not be more than 20 characters'],
   },
 });
 
@@ -97,11 +86,14 @@ const LocalGuardianSchema = new Schema<TLocalGuardian>({
 const studentSchema = new Schema<TStudent, StudentModel>(
   {
     id: { type: 'String', required: [true, 'ID is required'], unique: true },
-    password: {
-      type: 'String',
-      required: [true, 'Password is required'],
-      maxlength: [20, 'Password can not be more than 20 character'],
+
+    user: {
+      type: Schema.Types.ObjectId,
+      required: [true, 'User id is required'],
+      unique: true,
+      ref: 'User',
     },
+
     name: {
       type: userNameSchema,
       required: [true, 'Name is required'],
@@ -140,11 +132,6 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       required: true,
     },
     profileImg: { type: String },
-    isActive: {
-      type: String,
-      enum: ['active', 'block'],
-      default: 'active',
-    },
     isDeleted: {
       type: Boolean,
       default: false,
@@ -159,7 +146,7 @@ const studentSchema = new Schema<TStudent, StudentModel>(
 
 // virtual
 studentSchema.virtual('fullName').get(function () {
-  return `${this.name.firstName} + ${this.name.middleName} + ${this.name.lastName};
+  return this.name.firstName + this.name.middleName + this.name.lastName;
 });
 
 // Query Middleware
