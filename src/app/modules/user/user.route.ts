@@ -1,5 +1,5 @@
 import express from 'express';
-import { studentValidations } from '../student/student.validation';
+import { createStudentValidationSchema } from '../student/student.validation';
 import { UserControllers } from './user.controller';
 import validateRequest from '../../middlewares/validateRequest';
 
@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post(
   '/create-student',
-  validateRequest(studentValidations.createStudentValidationSchema),
+  validateRequest(createStudentValidationSchema),
   UserControllers.createStudent,
 );
 
