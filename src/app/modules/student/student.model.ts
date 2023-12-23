@@ -13,7 +13,6 @@ const userNameSchema = new Schema<TUserName>({
     required: [true, 'First name is required'],
     trim: true,
     maxlength: [20, 'First name can not be more than 20 characters'],
-     
   },
   middleName: {
     type: 'String',
@@ -108,7 +107,7 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       required: true,
       trim: true,
     },
-    dateOfBirth: { type: String },
+    dateOfBirth: { type: Date },
     email: {
       type: String,
       required: [true, 'Email is required'],
@@ -132,6 +131,10 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       required: true,
     },
     profileImg: { type: String },
+    admissionSemester: {
+      type: Schema.Types.ObjectId,
+      ref: 'AcademicSemester',
+    },
     isDeleted: {
       type: Boolean,
       default: false,
