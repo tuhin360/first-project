@@ -39,7 +39,7 @@ const getAllAcademicSemestersFromDB = async () => {
     return result;
   };
 
-  
+
 
 export const AcademicSemesterServices = {
   createAcademicSemesterIntoDB,

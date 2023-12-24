@@ -14,7 +14,7 @@ router.post(
 );
 
 router.get(
-  '/:studentId',
+  '/:semesterId',
   AcademicSemesterControllers.getSingleAcademicSemester,
 );
 
