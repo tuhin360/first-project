@@ -8,7 +8,7 @@ const academicDepartmentSchema = new Schema<TAcademicDepartment>(
       required: true,
       unique: true,
     },
-    academicfaculty: {
+    academicFaculty: {
       type: Schema.Types.ObjectId,
       ref: 'AcademicFaculty',
     },
@@ -17,6 +17,8 @@ const academicDepartmentSchema = new Schema<TAcademicDepartment>(
     timestamps: true,
   },
 );
+
+
 
 export const AcademicDepartment = model<TAcademicDepartment>(
   'AcademicDepartment',
