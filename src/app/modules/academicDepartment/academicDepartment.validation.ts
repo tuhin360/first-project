@@ -35,3 +35,4 @@ export const AcademicDepartmentValidation = {
   createAcademicDepartmentValidationSchema,
   updateAcademicDepartmentValidationSchema,
 };
+
