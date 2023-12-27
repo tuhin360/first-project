@@ -1,3 +1,4 @@
+import { Student } from './student.model';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { StudentServices } from './student.service';
@@ -17,13 +18,26 @@ const getAllStudents = catchAsync(async (req, res) => {
 });
 
 const getSingleStudent = catchAsync(async (req, res) => {
-  const {studentId} = req.params;
+  const { studentId } = req.params;
   const result = await StudentServices.getSingleStudentsFromDB(studentId);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Students is retrieved successfully',
+    data: result,
+  });
+});
+
+const updateStudent = catchAsync(async (req, res) => {
+  const { studentId } = req.params;
+  const {student} = req.body;
+  const result = await StudentServices.updateStudentIntoDB(studentId, student);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Students is updated successfully',
     data: result,
   });
 });
@@ -38,10 +52,11 @@ const deleteStudent = catchAsync(async (req, res) => {
     message: 'Students is deleted successfully',
     data: result,
   });
-})
+});
 
 export const StudentControllers = {
   getAllStudents,
   getSingleStudent,
   deleteStudent,
+  updateStudent,
 };
