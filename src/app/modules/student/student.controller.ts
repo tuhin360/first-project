@@ -1,4 +1,3 @@
-import { Student } from './student.model';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { StudentServices } from './student.service';
